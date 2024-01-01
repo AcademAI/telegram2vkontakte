@@ -47,7 +47,7 @@ def get_entry(message_id) -> int:
                 return int(line.split(':')[1])
     raise KeyError(f'{message_id} is not in the file!')
 
-
+ 
 @retry(stop=tenacity.stop_after_attempt(3), wait=tenacity.wait_fixed(1), retry=tenacity.retry_if_exception_type(ConnectionError))
 def create_vk_post(text: str, message_id, photo_list=None, video_list=None):
     photos, videos = [], []
