@@ -1,0 +1,21 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Production:
+    name: Deploy to Homelab
+    runs-on: ubuntu-latest
+    environment: Production
+    steps:
+      - name: Cloudflared SSH Run Remote Commands
+        uses: npgy/cloudflared-ssh-action@v2.0
+        with:
+          host: ${{ vars.SSH_HOST }}
+          username: ${{ secrets.USER_NAME }}
+          private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          commands: cd /root/telegram2vkontakte; git reset --hard; git checkout main; git pull origin main; docker stop telegram2vkontakte; docker rm telegram2vkontakte; docker rmi telegram2vkontakte; docker build -t telegram2vkontakte .; docker run --detach --name telegram2vkontakte telegram2vkontakte; docker image prune -a -f
