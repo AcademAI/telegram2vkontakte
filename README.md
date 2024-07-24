@@ -1,8 +1,8 @@
-# RSS to Telegram with GPT
-RSS feed parser with GPT to post in your channel
+# Telegram to VK
+Just a reposter
 
 # Features
-1. New post comes to telegram channel (meant to use with rss_gpt_tg)
+1. New post comes to telegram channel
 2. Reposts to your vk
 
 ## Setup
